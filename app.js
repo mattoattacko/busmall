@@ -13,7 +13,7 @@
 
 
 //we have a list of images, so we can make an array
-Product.names = ['bag', 'banana', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+Product.names = ['bag', 'banana', 'boots', 'bathroom', 'breakfast', 'bubblegum', 'chair', 'cthulu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
 //contains all our products
 Product.all = [];//empty because we need to push information that has been randomized into this array. Add it to our constructor function
@@ -29,7 +29,14 @@ Product.totalClicks = 0;//it's zero because we don't know how many total clicks 
 //the only parameter we know for a fact off the bat is that it will have a name
 function Product(name) {
   this.name = name;
-  this.path = 'img/' + name + '.jpg';
+  if (name === 'sweep') {
+    this.path = 'img/' + name + '.png';
+  }else if (name === 'usb'){
+    this.path = 'img/' + name + '.gif';
+  }else{
+    this.path = 'img/' + name + '.jpg';
+  }
+  // this.path = 'img/' + name + '.jpg';
   this.votes = 0;
   this.views = 0;
   Product.all.push(this);
@@ -39,12 +46,11 @@ function Product(name) {
 for (var i = 0; i < Product.names.length; i++) {
   //console.log(Product.names[i]);
   //console.log();
-
   new Product(Product.names[i]);//now each of our products is an object, or will be when we call the function
 }
 
 function makeRandom() {
-  return Math.floor(Math.random() * Product.name.length);
+  return Math.floor(Math.random() * Product.names.length);
 }
 
 //now lets work on displaying the pictures using a function
@@ -75,7 +81,6 @@ function displayPics() {
   //take it to the DOM
   for (var i = 0; i < 3; i++) {
     Product.pics[i].src = Product.all[currentlyShowing[i]].path;
-    console.log(currentlyShowing[i]);
     Product.pics[i].id = Product.all[currentlyShowing[i]].name;
     Product.all[currentlyShowing[i]].views += 1;
     Product.justViewed[i] = currentlyShowing[i];
