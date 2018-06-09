@@ -1,7 +1,8 @@
 * {
-    color: blue;
+    color: rgb(255, 80, 188);
+    background-color: black;
     font-family: 'Helvetica';
-    outline: 1px dashed green;
+    outline: 1px rgb(22, 5, 247);
 }
 
 img {
