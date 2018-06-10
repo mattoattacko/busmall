@@ -57,6 +57,11 @@ function makeRandom() {
 function displayPics() {
   //we are using an array to keep track of the pics we have already seen.
   var currentlyShowing = []; //so we can push the images into this array and keep track of them. It's a local variable.
+ 
+  Product.votesData = [];
+  for(var m = 0; m < Product.names.length; m++){
+      Product.votesData.push(Product.all[m].votes); 
+  }
   //we need to make the left image unique
   currentlyShowing[0] = makeRandom();
   //we don't have to use a while loop
@@ -96,6 +101,7 @@ function handleClick(event) {
     Product.container.removeEventListener('click', handleClick);
     //show the list after the last click
     showTally(); //if we remove the event listener, that means we have enough clicks. thats when the list will populate in the browser. That's the showTally()
+    makeChart();
   }
   //this is how we direct the user to click on a specific image. If they click in the image container but not on a specific image, we can use...
   if (event.target.id === 'image_container') {
@@ -123,5 +129,47 @@ function showTally() {
   }
 }
 //now we need an event listener
+
+
+//first add the cdn link to the head of your html
+//find the chart object in the console and inspect it ex: myChart, myChart.data, myChart.datasets[0].data
+//the data renders how hight he bar chart will be
+//data: [], will hold the votes for each product image
+//Labels: ['red' etc] will hold the name for each product
+//myChart.update() is the method you will need to keep an eye on
+//ex: myChart.data.datasets[0].data[0] = 4 assigns a new value to it
+//myChart.update() //should change the value and update the chart
+
+//this holds the value for the votes of each product image
+
+//this is the name for each product
+function makeChart() {
+  var labelColors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange', '#C7F2FF', '#d4ac0d', '#138d75', '#2e86c1', '#884ea0', '#c0392b', '#0692ff', '#0a7a5f', '#e3a968', '#f19898', '#035404', '#68edf0', '#a0a8d6', '#68edf0', '#035404'];
+
+var ctx = document.getElementById('chart').getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'bar', 
+    data: {
+        labels: Product.names,
+        datasets: [{
+            label: '# of Votes',
+            data:   Product.votesData,
+            backgroundColor: labelColors
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+}
+
+
 Product.container.addEventListener('click', handleClick);
 displayPics();
