@@ -2,20 +2,21 @@
 <html> 
     <head>
         <title>Bus Mall Demo</title>
-        <link rel="stylesheet" href="style.css"
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
     </head>
     <body>
-        <h1>
-            BusMall Marketing Study
-        </h1>  
-        <p>Instructions and interesting data</p>
-        <p>More instructions and desireable data...</p>
+        <center><h1>BusMall Marketing Study</h1>
+        <p>Please click on the picutre of the item you would be most likely interested in purchasing.</p>
+        <p>Make sure to only click on the images.</p></center> 
         <section id="image_container">
             <img src="" id="left">
             <img src="" id="center">
             <img src="" id="right">
         </section>
         <ul id="tally"></ul>
+        
     </body>
-    <script src="app.js"></script>
+    <canvas id="chart"></canvas>
+    <script type="text/javascript" src="app.js"></script>
 </html>
