@@ -25,6 +25,13 @@ Product.pics = [document.getElementById('left'), document.getElementById('center
 Product.tally = document.getElementById('tally');
 Product.totalClicks = 0;//it's zero because we don't know how many total clicks have come through.
 
+//add stuff for localstorage
+var infoProduct;
+var getProductInfo;
+var setClick;
+var getClick;
+
+
 //we can all our constructor funtion Product
 //the only parameter we know for a fact off the bat is that it will have a name
 function Product(name) {
@@ -76,7 +83,6 @@ function displayPics() {
     currentlyShowing[1] = makeRandom();
   }
   //make right image unique
-
   currentlyShowing[2] = makeRandom();
   while (currentlyShowing[0] === currentlyShowing[2] || currentlyShowing[1] === currentlyShowing[2] || Product.justViewed.indexOf(currentlyShowing[2]) !== -1) {
     console.error('Duplicate at right! Re run!');
@@ -94,6 +100,12 @@ function displayPics() {
 //need a way to click on the image, so we need an event
 //event listener for keeping track of the total clicks on images
 function handleClick(event) {
+  //_______localstorage______//
+  infoProduct = JSON.stringify(Product.all);
+  localStorage.setItem('products', infoProduct);
+  setClick = JSON.stringify(Product.totalClicks);
+  localStorage.setItem('totalClicks', setClick);
+  //_______localstorage______//
   console.log(Product.totalClicks, 'total clicks');
   //we need to make the clicks stop at 25 clicks according to the requirements
   //container is where the images are stored
@@ -102,6 +114,7 @@ function handleClick(event) {
     //show the list after the last click
     showTally(); //if we remove the event listener, that means we have enough clicks. thats when the list will populate in the browser. That's the showTally()
     makeChart();
+    localStorage.clear();
   }
   //this is how we direct the user to click on a specific image. If they click in the image container but not on a specific image, we can use...
   if (event.target.id === 'image_container') {
@@ -118,7 +131,6 @@ function handleClick(event) {
   }
   displayPics();
 }
-
 //show the tally using the list in the DOM once the event listener has been removed
 function showTally() {
   for (var i = 0; i < Product.all.length; i++) {
@@ -128,8 +140,14 @@ function showTally() {
     Product.tally.appendChild(liEl);
   }
 }
-//now we need an event listener
-
+//________more localstorage stuff______//
+if (localStorage.products){
+  getProductInfo = localStorage.getItem('products');
+  Product.all = JSON.parse(getProductInfo);
+  getClick = localStorage.getItem('totalClicks');
+  Product.totalClicks = JSON.parse(getClick);
+}
+//^_______new localstorage stuff______^//
 
 //first add the cdn link to the head of your html
 //find the chart object in the console and inspect it ex: myChart, myChart.data, myChart.datasets[0].data
