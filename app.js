@@ -67,7 +67,7 @@ function displayPics() {
  
   Product.votesData = [];
   for(var m = 0; m < Product.names.length; m++){
-      Product.votesData.push(Product.all[m].votes); 
+    Product.votesData.push(Product.all[m].votes); 
   }
   //we need to make the left image unique
   currentlyShowing[0] = makeRandom();
@@ -164,28 +164,28 @@ if (localStorage.products){
 function makeChart() {
   var labelColors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange', '#C7F2FF', '#d4ac0d', '#138d75', '#2e86c1', '#884ea0', '#c0392b', '#0692ff', '#0a7a5f', '#e3a968', '#f19898', '#035404', '#68edf0', '#a0a8d6', '#68edf0', '#035404'];
 
-var ctx = document.getElementById('chart').getContext('2d');
+  var ctx = document.getElementById('chart').getContext('2d');
 
-var myChart = new Chart(ctx, {
+  var myChart = new Chart(ctx, {
     type: 'bar', 
     data: {
-        labels: Product.names,
-        datasets: [{
-            label: '# of Votes',
-            data:   Product.votesData,
-            backgroundColor: labelColors
-        }]
+      labels: Product.names,
+      datasets: [{
+        label: '# of Votes',
+        data:   Product.votesData,
+        backgroundColor: labelColors
+      }]
     },
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
     }
-});
+  });
 }
 
 
