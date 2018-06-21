@@ -1,8 +1,19 @@
 * {
-    color: rgb(124, 3, 78);
-    background-color: rgb(231, 230, 230);
+    color: rgb(252, 252, 252);
     font-family: 'Helvetica';
     outline: 1px rgb(98, 5, 247);
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    /* Some Cool CSS background gradient I found */
+    background: radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
 }
 
 img {
